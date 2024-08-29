@@ -1,0 +1,84 @@
+
+{% extends 'main/layout.html' %}
+
+{% load static %}
+
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/account.css' %}">
+{% endblock %}
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/'%}{{ your_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}
+{% block main %}
+     <div class="top-wrapper">
+        <div class="user-img">
+            <a href="{% url 'upload-user-photo' %}"><img src="{% static 'main/img/'%}{{ user_photo }}"></a>
+        </div>
+        <div class="right-wrapper">
+            <div class="name-wrapper">
+                <p class="name">{{name}}</p>
+            </div>
+            <div class="user-stat">
+                <p class="followers">Followers : {{followers}}</p>
+                <p class="subscriptions">Subscriptions : {{subs}}</p>
+                <p class="friends">Friends : {{friends}}</p>
+            </div>
+        </div>
+         <form action="/autorized/podpiska/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.username }}
+            <input type="hidden" name="username" value="{{ name }}">
+            <input type="submit" value="{{sub_info}}">
+         </form>
+         <form action="/autorized/add_friend/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.username }}
+            <input type="hidden" name="username" value="{{ name }}">
+            <input type="submit" value="{{ friend_info }}">
+         </form>
+    </div>
+    <div class="bottom-wrapper">
+        {% if posts_data %}
+        {% for post_data in posts_data %}
+        <div class="post">
+            <div class="picture">
+                <img src="{% static 'main/img/' %}{{ post_data.post.photo }}" alt="Post Image">
+            </div>
+            <p class="signature">{{post_data.post.signature}}</p>
+            <ul>
+                {% for comment in post_data.comments %}
+                <li>{{ comment.user.username }}: {{ comment.text }}</li>
+                {% endfor %}
+            </ul>
+            <form action="/autorized/comments_input/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.username }}
+                <input type="hidden" name="username" value="{{ name }}">
+                <input type="hidden" name="post" value="{{ post_data.post.photo }}">
+                <input type="text" name="comment" required>
+                <input type="hidden" name="page" value="someone">
+                <input type="submit" value="Отправить">
+            </form>
+
+            <a href="{% url 'like' post_id=post_data.post.id page='someone'%}"><i class='{{post_data.like_info}}'> </i></a>  {{ post_data.likes|length }}
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="photo-wrapper"></div>
+
+
+{% endblock %}

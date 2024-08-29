@@ -1,0 +1,150 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/news.css' %}">
+{% endblock %}
+{% block body %}
+    <asside class='left_column'>
+        <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+        </ul>
+    </asside>
+    <div class="bottom-wrapper">
+        <div class="stories">
+        <div class="stories-wrapper">
+            <div class="add-story">
+            <a href="{% url 'stories' %}"><i class="fa-solid fa-circle-plus"></i></a>
+            </div>
+            {% if stories_info %}
+            {% for stories in stories_info %}
+            <div class="story">
+                <div class="user_photo">
+                    <img src="{% static 'main/img/' %}{{stories.user_photo}}" alt="Image" onclick="openModal([{% for story in stories.story %} '{% static 'main/img/' %}{{story.content}}',{% endfor %}], '{{stories.user_photo}}')" style="cursor: pointer;">
+                </div>
+                <p class="user_name">{{stories.user_name}}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        </div>
+        {% if lenta_info %}
+        <div class="posts_all">
+        {% for posts in lenta_info %}
+        <div class="user">
+            <div class="user_photo">
+                <a href="{% url 'to_user' posts.user_name %}"><img src="{% static 'main/img/' %}{{posts.user_photo}}" alt="User Image"></a>
+            </div>
+            <p class="user_name">{{posts.user_name}}</p>
+        </div>
+        <div class="post">
+            <div class="picture">
+                <img src="{% static 'main/img/' %}{{posts.post.photo }}" alt="Post Image">
+            </div>
+            <br>
+            <p class="signature">{{posts.post.signature}}</p>
+            </div>
+            <ul>
+                {% for comment in posts.comments %}
+                <li>{{ comment.user.username }}: {{ comment.text }}</li>
+                {% endfor %}
+            </ul>
+            <form action="/autorized/comments_input/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.username }}
+                <input type="hidden" name="username" value="{{ posts.user_name }}">
+                <input type="hidden" name="post" value="{{ posts.post.photo }}">
+                <input type="text" name="comment" required>
+                <input type="hidden" name="page" value="main">
+                <input type="submit" value="Отправить">
+            </form>
+
+            <a href="{% url 'like' post_id=posts.post.id page='main' %}"><i class='{{posts.like_info}}'> </i></a>  {{ posts.likes|length }}
+
+
+        {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+  <!-- Модальное окно -->
+  <div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+      <div class="story_user_photo">
+      <a id='myUrl' href="#"><img id="user_img" style="cursor: pointer;"></a>
+      </div>
+    <div id="mediaContainer" class="media-container">
+    </div>
+      <div class="prev" onclick="prevImage()">&#10094;</div>
+      <div class="next" onclick="nextImage()">&#10095;</div>
+  </div>
+<!-- Скрипт для открытия и закрытия модального окна -->
+  <script>
+    var media = []; // @type {Array}
+    var currentIndex = 0;
+    function openModal(story, user_card) {
+    var lol = user_card.replace("photos_root/","");
+    var url = "/autorized/to_user/" + encodeURIComponent(lol) + ".flag" +  "/";
+        document.getElementById('myUrl').setAttribute('href', url);
+        console.log(user_card)
+        currentIndex = 0;
+        media = []
+        story.forEach(function(item) {
+        media.push(item);});
+        var modal = document.getElementById('myModal');
+        var user_image =  document.getElementById('user_img');
+        user_image.src = "/static/main/img/"+user_card
+        modal.style.display = "block";
+        console.log(currentIndex);
+        showImage();
+    }
+
+    function closeModal() {
+      var modal = document.getElementById('myModal');
+      modal.style.display = "none";
+    }
+
+    function showImage() {
+      var mediaContainer = document.getElementById('mediaContainer');
+      var currentMedia = media[currentIndex];
+      var extension = currentMedia.split('.').pop().toLowerCase();
+      if (extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif') {
+        mediaContainer.innerHTML = `<img class="modal-content" src="${currentMedia}">`;
+      } else if (extension === 'mp4' || extension === 'webm' || extension === 'ogg') {
+        mediaContainer.innerHTML = `<video class="modal-content" controls><source src="${currentMedia}" type="video/mp4"></video>`;
+      }
+    }
+
+    function prevImage() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        showImage();
+      }
+      console.log(currentIndex);
+    }
+
+    function nextImage() {
+      if (currentIndex < media.length - 1) {
+        currentIndex++;
+        showImage();
+      }
+      console.log(currentIndex);
+    }
+
+    // Закрыть модальное окно, если пользователь щелкнет вне его
+    window.onclick = function(event) {
+      var modal = document.getElementById('myModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+{% endblock %}
+
+
+

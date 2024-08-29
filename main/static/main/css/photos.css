@@ -1,0 +1,160 @@
+body {
+    background: #ebd8d8;
+}
+
+body asside {
+    float: left;
+    background: #181818;
+    width: 11.5%;
+    padding: 2.5%;
+    height: 100vh;
+    border-right: 5px solid #4d4d4d;
+
+}
+
+
+body asside img {
+    width: 150%;
+    float: left;
+    margin-left: -22%;
+    margin-top: -35%;
+}
+body asside ul{
+    width: 170%;
+    margin-top: 110px;
+    margin-left: -35%;
+}
+body asside ul a{
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+}
+body asside ul li{
+    color: #fff;
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    position: relative;
+    left: -21%;
+    transition: transform .6s ease;
+
+}
+body asside ul li:hover, asside ul a:hover{
+    color: red;
+    text-decoration: none;
+    transform: scale(1.05);
+
+
+}
+
+input[type="submit"] {
+    border-radius: 15px; /* Устанавливает радиус скругления углов */
+    padding: 5px 5px; /* Устанавливает внутренние отступы для кнопки */
+    border: none; /* Убирает границу */
+    background-color: #784d4d; /* Устанавливает фоновый цвет */
+    color: white; /* Устанавливает цвет текста */
+    cursor: pointer; /* Изменяет курсор при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Меняет фоновый цвет при наведении */
+
+}
+
+/* Основные стили для формы */
+form {
+    max-width: 600px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #ebd8ff; /* Фоновый цвет */
+    border-radius: 10px; /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+/* Стили для заголовков формы */
+form p {
+    font-size: 16px; /* Размер шрифта */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #333; /* Цвет текста */
+}
+
+/* Стили для элементов select */
+select {
+    width: 100%; /* Ширина 100% */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 10px; /* Скругленные углы */
+    background-color: #fff; /* Фоновый цвет */
+    font-size: 16px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    outline: none; /* Убирает обводку при фокусе */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+}
+
+select:focus {
+    border-color: #4CAF50; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Тень при фокусе */
+}
+
+/* Стили для текстового поля */
+input[type="text"] {
+    width: 100%; /* Ширина 100% */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 10px; /* Скругленные углы */
+    background-color: #fff; /* Фоновый цвет */
+    font-size: 16px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    outline: none; /* Убирает обводку при фокусе */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход */
+}
+
+input[type="text"]:focus {
+    border-color: #4CAF50; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Тень при фокусе */
+}
+
+/* Стили для кнопки submit */
+input[type="submit"] {
+    width: 100%; /* Ширина 100% */
+    padding: 10px; /* Внутренние отступы */
+    border: none; /* Убирает границу */
+    border-radius: 10px; /* Скругленные углы */
+    color: white; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+    cursor: pointer; /* Курсор указателя */
+    transition: background-color 0.3s; /* Плавный переход */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Цвет фона при наведении */
+}
+
+.image-list {
+    position: fixed; /* Устанавливаем позиционирование фиксированное */
+    bottom: 0; /* Размещаем элемент внизу */
+    left: 1.1%; /* Выравниваем элемент по левому краю */
+    width: 90%; /* Занимаем всю доступную ширину */
+    margin-left: 10%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    background-color: #181818;
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку при необходимости */
+    white-space: nowrap;
+    border-top: 5px solid #4d4d4d;
+
+
+}
+
+.image-list img {
+    width: 130px;
+    margin: 0 10px; /* Добавляем небольшие отступы между изображениями */
+    height: auto; /* Поддерживаем соотношение сторон изображений */
+    transition: transform .6s ease;
+}
+
+.image-list img:hover {
+    transform: scale(1.05);/* Поддерживаем соотношение сторон изображений */
+}

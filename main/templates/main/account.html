@@ -1,0 +1,65 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/account.css' %}">
+{% endblock %}
+
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+        </ul>
+    </asside>
+{% endblock %}
+
+{% block main %}
+    <div class="top-wrapper">
+        <div class="user-img">
+            <a href="{% url 'upload-user-photo' %}"><img src="{% static 'main/img/'%}{{ user_photo }}"></a>
+        </div>
+        <div class="right-wrapper">
+            <div class="name-wrapper">
+                <p class="name">{{name}}</p>
+            </div>
+            <div class="user-stat">
+                <p class="followers">Followers : {{followers}}</p>
+                <p class="subscriptions">Subscriptions : {{subs}}</p>
+                <p class="friends">Friends : {{friends}}</p>
+                <a href="{% url 'history' %}"><li>Архив</li></a>
+                <a href="{% url 'delete_story' %}"><li>Удалить истории</li></a>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-wrapper">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post">
+                    <div class="picture">
+                        <img src="{% static 'main/img/' %}{{ post.photo }}"  alt="Post Image">
+                        <div class="trash-can">
+                             <a id="myUrl" href="{% url 'delete-post' post_counter=forloop.counter %}"><i class="fa-solid fa-trash-can"></i></a>
+                        </div>
+                    </div>
+                    <p class="signature">{{post.signature}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="photo-wrapper"></div>
+{% endblock %}
+
+<script>
+    function open(user_card) {
+    lol = user_card.replace("post_photos_root/","");
+    var url = "/delete-post/" + encodeURIComponent(lol) + ".flag" +  "/";
+    console.log(url);
+    window.location.href = url;
+</script>

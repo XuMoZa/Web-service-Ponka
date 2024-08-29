@@ -1,0 +1,41 @@
+{% extends 'main/layout.html' %}
+{% if message %}
+    <script>
+    alert('{{ message }}')
+    </script>
+{% endif %}
+{% load static %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/user_photo.css' %}">
+{% endblock %}
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}
+{% block main %}
+        <form action="/autorized/change_settings/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Выберите, кто может просматривать ваш аккаунт</p>
+            {{acc_set.account_set}}
+            <p>Выберите, кто может просматривать ваши истории</p>
+            {{stor_set.stories_set}}
+            <p>Выберите, кто может оставлять комментарии на ваших постах</p>
+            {{com_set.comments_set}}
+            <p>Напишите имена аккаунтов, разделяя их пробелом, которые вы хотите внести в черный список</p>
+            <input type="text" id="blacklist" name="blacklist">
+            <input type="submit" value="Готово">
+        </form>
+{% endblock %}
+

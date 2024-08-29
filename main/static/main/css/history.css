@@ -1,0 +1,105 @@
+body {
+    background: #ebd8d8;
+    width: 100%;
+    height: 100%;
+}
+
+body asside {
+    float: left;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #181818;
+    width: 11.5%;
+    padding: 2.5%;
+    height: 100vh;
+    border-right: 5px solid #4d4d4d;
+
+}
+
+
+body asside img {
+    width: 150%;
+    float: left;
+    margin-left: -22%;
+    margin-top: -35%;
+}
+body asside ul{
+    width: 170%;
+    margin-top: 110px;
+    margin-left: -35%;
+}
+body asside ul a{
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+}
+body asside ul li{
+    color: #fff;
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    position: relative;
+    left: -21%;
+    transition: transform .6s ease;
+
+}
+body asside ul li:hover, asside ul a:hover{
+    color: red;
+    text-decoration: none;
+    transform: scale(1.05);
+
+
+}
+/* Оформление блока bottom-wrapper */
+/* Оформление блока bottom-wrapper */
+.bottom-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Центрирование блоков постов по горизонтали */
+    padding: 20px; /* Добавляем внутренний отступ для блока bottom-wrapper */
+    flex-direction: row; /* Устанавливаем направление расположения блоков в ряд */
+}
+
+.picture {
+    width: 200px; /* Фиксированная ширина блока .post */
+    height: 200px; /* Фиксированная высота блока .post */
+    background: #181818;
+    border-radius: 8px; /* Добавляем закругленные углы для стиля */
+}
+
+.story {
+    width: 200px; /* Фиксированная ширина блока .story */
+    height: 200px; /* Фиксированная высота блока .story */
+    margin 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование содержимого по горизонтали */
+    text-align: center; /* Центрирование содержимого по вертикали */
+}
+.mediaContainer{
+    width: 100%; /* Фиксированная ширина блока .story */
+    height: 100%; /* Фиксированная высота блока .story */
+    margin: 10px; /* Отступ между постами */
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Центрирование содержимого по горизонтали */
+    text-align: center; /* Центрирование содержимого по вертикали */
+}
+
+
+/* Оформление изображений в блоке .story */
+.mediaContainer img {
+    width: 100%; /* Заполнять 100% ширины блока .story */
+    height: 100%; /* Заполнять 100% высоты блока .story */
+    object-fit: cover; /* Отображать изображение внутри блока, сохраняя пропорции */
+    border-radius: 8px; /* Добавляем закругленные углы для стиля */
+    margin: 5%;
+}
+.mediaContainer video {
+    width: 100%; /* Заполнять 100% ширины блока .story */
+    height: 100%; /* Заполнять 100% высоты блока .story */
+    object-fit: cover; /* Отображать изображение внутри блока, сохраняя пропорции */
+    border-radius: 8px; /* Добавляем закругленные углы для стиля */
+    margin: 5%;
+}

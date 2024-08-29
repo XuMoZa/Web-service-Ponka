@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block main %}
+
+{% endblock %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/news.css' %}">
+{% endblock %}
+{% block body %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/logo.jpg'%}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}

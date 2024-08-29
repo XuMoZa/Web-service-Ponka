@@ -1,0 +1,229 @@
+body {
+    background: #ebd8d8;
+    width: 100%;
+    height: 100%;
+}
+
+body asside {
+    float: left;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #181818;
+    width: 11.5%;
+    padding: 2.5%;
+    height: 100vh;
+    border-right: 5px solid #4d4d4d;
+
+}
+
+
+body asside img {
+    width: 150%;
+    float: left;
+    margin-left: -22%;
+    margin-top: -35%;
+}
+body asside ul{
+    width: 170%;
+    margin-top: 110px;
+    margin-left: -35%;
+}
+body asside ul a{
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+}
+body asside ul li{
+    color: #fff;
+    display: block;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    position: relative;
+    left: -21%;
+    transition: transform .6s ease;
+
+}
+body asside ul li:hover, asside ul a:hover{
+    color: red;
+    text-decoration: none;
+    transform: scale(1.05);
+
+
+}
+/* Оформление блока top-wrapper */
+.top-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Добавляем внутренний отступ для блока top-wrapper */
+    background: #ebd8d8;
+    border-bottom: 2px solid #ddd; /* Добавляем разделительную линию под top-wrapper */
+}
+
+.user-img img {
+    width: 100px; /* Размер фото пользователя */
+    height: 100px;
+    object-fit: cover; /* Сохранение пропорций и обрезка изображения, если необходимо */
+    border-radius: 50%; /* Создание круглого изображения */
+}
+
+.name-wrapper {
+    margin-left: 20px; /* Отступ от фото пользователя */
+}
+
+.user-stat {
+    margin-left: 10px;
+}
+
+/* Оформление блока bottom-wrapper */
+.bottom-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2%;
+    margin-right: -9%;
+    justify-content: center; /* Центрирование блоков постов по горизонтали */
+    padding: 20px; /* Добавляем внутренний отступ для блока bottom-wrapper */
+}
+
+.picture {
+    width: 200px; /* Фиксированная ширина блока .post */
+    height: 200px; /* Фиксированная высота блока .post */
+    background: #181818;
+    border-radius: 8px; /* Добавляем закругленные углы для стиля */
+}
+
+.post {
+    width: 24%; /* Фиксированная ширина блока .post */
+    height: 24%; /* Фиксированная высота блока .post */
+    margin: -20px; /* Отступ между постами */
+        position: relative;
+    display: inline-block;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    overflow: hidden; /* Обрезаем изображение, выходящее за пределы блока */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование содержимого по горизонтали */
+    text-align: center; /* Центрирование содержимого по вертикали */
+}
+.trash-can {
+    position: absolute;
+    top: 5px;
+    right: 45px;
+}
+input[type="submit"] {
+    border-radius: 15px; /* Устанавливает радиус скругления углов */
+    padding: 5px 5px; /* Устанавливает внутренние отступы для кнопки */
+    border: none; /* Убирает границу */
+    background-color: #784d4d; /* Устанавливает фоновый цвет */
+    color: white; /* Устанавливает цвет текста */
+    cursor: pointer; /* Изменяет курсор при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Меняет фоновый цвет при наведении */
+
+}
+.trash-can a {
+    color: #fff;
+    background-color: red;
+    padding: 5px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+.post img {
+    width: 100%; /* Заполнять 100% ширины блока .post */
+    height: 100%; /* Заполнять 100% высоты блока .post */
+    object-fit: cover; /* Отображать изображение внутри блока, сохраняя пропорции */
+    border-radius: 8px; /* Добавляем закругленные углы для стиля */
+}
+
+.signature {
+    margin-top: auto; /* Отступ подписи от изображения, автоматически занимает оставшееся пространство в блоке .post */
+    padding: 10px; /* Добавляем отступ для подписи */
+
+}
+/* Стили для модального окна */
+.modal {
+  display: none; /* Скрыть модальное окно по умолчанию */
+  position: fixed;
+  z-index: 1;
+  padding-top: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  height: 100%;
+  max-height: 1080px;
+  max-width: 700px;
+}
+/* Стили для изображения в модальном окне */
+.media-container {
+  margin: auto;
+  display: block;
+  width: 80%;
+  height: 100%;
+  max-height: 1000px;
+  max-width: 700px;
+}
+
+/* Стили для закрытия модального окна */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.prev {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.delete-history {
+  position: absolute;
+  top: 20px;
+  right: 300px;
+  cursor: pointer;
+  color: white
+}

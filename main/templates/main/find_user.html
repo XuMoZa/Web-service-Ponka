@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/photos.css' %}">
+{% endblock %}
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+         <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}
+{% block main %}
+    <form action="/autorized/user_search_result/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nickname">Введите Nickname пользователя:</label>
+        <input type="text" id="nickname" name="nickname" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

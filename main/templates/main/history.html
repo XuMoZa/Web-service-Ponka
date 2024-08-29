@@ -1,0 +1,58 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/history.css' %}">
+{% endblock %}
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}
+{% block main %}
+    <div class="bottom-wrapper">
+        <div class="story">
+                <div class="mediaContainer" id="mediaContainer"></div>
+        </div>
+    </div>
+    <div class="photo-wrapper"></div>
+ <input type="hidden" id="static-url" value="{% static 'main/img/' %}">
+<script>
+    function showImage(stories) {
+        var mediaContainer = document.getElementById('mediaContainer');
+        var staticUrl = document.getElementById('static-url').value;
+
+        stories.forEach(function(story) {
+            var extension = story.split('.').pop().toLowerCase();
+            if (extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif') {
+                var img = document.createElement('img');
+                img.src = staticUrl + story;
+                img.className = 'story-photo';
+                mediaContainer.appendChild(img);
+            } else if (extension === 'mp4' || extension === 'webm' || extension === 'ogg') {
+                var video = document.createElement('video');
+                video.src = staticUrl + story;
+                video.className = 'story-video';
+                video.controls = true;
+                mediaContainer.appendChild(video);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var stories = {{ stories|safe }};
+        showImage(stories);
+    });
+</script>
+{% endblock %}

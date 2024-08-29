@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.signin),
+    path('registered', views.registered, name='registered'),
+    path('post_upload/', views.post_upload, name='post_upload'),
+    path('add_friend/', views.add_friend, name='add_friend'),
+    path('stories/', views.stories, name='stories'),
+    path('like/<int:post_id>/<str:page>/', views.like, name='like'),
+    path('user_search_result/', views.user_search_result, name = 'search_result'),
+    path('podpiska/', views.podpiska, name = 'podpiska'),
+    path('delete_story/', views.delete_story, name ='delete_story'),
+    path('history/', views.story_history, name='history'),
+    path('to_user/<str:user_name>/', views.to_user, name='to_user'),
+    path('search', views.find_user, name='search'),
+    path('post_user_photo/', views.post_user_photo, name='post_user_photo'),
+    path('comments_input/', views.comments_input, name='comments_input'),
+    path('add_comment/',views.add_comment, name='add_comment'),
+    path('search_results/', views.search_results, name='search_results'),
+    path('upload-user-photo', views.upload_user_photo, name='upload-user-photo'),
+    path('signup', views.signup, name='signup'),
+    path('friends', views.friends, name='friends'),
+    path('settings',views.settings, name='settings'),
+    path('delete-post/<int:post_counter>/',views.delete_post,name='delete-post'),
+    path('change_settings/',views.change_settings,name='change_settings'),
+    path('photos', views.photos, name='photos'),
+    path('story_upload/', views.story_upload, name='story_upload'),
+    path('home', views.index, name='home'),
+    path('account', views.account, name='account'),
+]

@@ -1,0 +1,38 @@
+{% extends 'main/layout.html' %}
+{% if message %}
+    <script>
+    alert('{{ message }}')
+    </script>
+{% endif %}
+{% load static %}
+{% block css_style %}
+    <link rel="stylesheet" href="{% static 'main/css/photos.css' %}">
+{% endblock %}
+{% block body %}
+    {% csrf_token %}
+    <asside class = 'left_column'>
+        <img src="{% static 'main/img/'%}{{ user_photo }}" alt="Лого">
+        <ul>
+            <a href="{% url 'home' %}"><li><i class="fa-solid fa-house"></i> Главная</li></a>
+            <a href="{% url 'account' %}"><li><i class="fa-solid fa-user"></i> Аккаунт</li></a>
+            <a href="{% url 'photos' %}"><li><i class="fa-solid fa-camera"></i> Фото</li></a>
+            <a href="{% url 'friends' %}"><li><i class="fa-solid fa-user-group"></i> Друзья</li></a>
+            <a href="{% url 'search' %}"><li><i class="fa-solid fa-magnifying-glass"></i> Поиск</li></a>
+            <a href="{% url 'settings' %}"><li><i class="fa-solid fa-gear"></i> Настройки</li></a>
+            <a href="{% url 'autorize' %}"><li><i class="fa-solid fa-right-from-bracket"></i> Выйти из аккаунта</li></a>
+
+        </ul>
+    </asside>
+{% endblock %}
+{% block main %}
+        <form action="/autorized/post_upload/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="photo">Выберите файл:</label>
+            <input type="file" name="photo" accept="image/*" id="photo">
+            <br>
+            <label for="signature">Подпись:</label>
+            <textarea name="signature" id="signature"></textarea>
+            <input type="submit" value="Загрузить">
+        </form>
+{% endblock %}
+
